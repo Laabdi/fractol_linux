@@ -19,15 +19,16 @@ void handle_pixels(t_fractal *fractol, int x, int y)
 
     int color;
 
-    c.real = getScaledValue(x, 0, WIDTH, -2, 2) + fractol->shift_x;
-    c.imag = getScaledValue(y, 0, HEIGHT, -2, 2) + fractol->shift_y;
+    c.real = getScaledValue(x, 0, WIDTH, -2, 2 * fractol->zoom) + fractol->shift_x;
+    c.imag = getScaledValue(y, 0, HEIGHT, -2, 2* fractol->zoom) + fractol->shift_y;
 
     int i = 0;
-    while (i <= 42) {
+    while (i <= fractol->iterations_defintion) 
+    {
         z = sum_comp(square_comp(z), c);
         if ((z.real * z.real) + (z.imag * z.imag) > 4) 
         {
-            color = getScaledValue(i, 0, 42, 0x00000, 0xFFFFF);
+            color = getScaledValue(i, 0, fractol->iterations_defintion, 0x000000, 0xFF0000);
             my_mlx_pixel_put(&fractol->image, x, y, color);
             return;
         }

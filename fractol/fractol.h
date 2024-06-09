@@ -21,12 +21,14 @@
 #define XK_Sys_Req                       0xff15
 #define XK_Escape                        0xff1b
 #define XK_Delete                        0xffff  /* Delete, rubout */
-typedef struct s_complex {
+typedef struct s_complex 
+{
     double real;
     double imag;
 } t_complex;
 
-typedef struct s_img {
+typedef struct s_img 
+{
     void *img;
     char *addr;
     int bits_per_pixel;
@@ -34,13 +36,15 @@ typedef struct s_img {
     int endian;
 } t_img;
 
-typedef struct s_fractal {
+typedef struct s_fractal 
+{
     void *mlx;
     void *window;
     t_img image;
     double shift_x;
     double shift_y;
-     
+    double zoom;
+    int iterations_defintion;
 } t_fractal;
 
 t_complex   sum_comp(t_complex z, t_complex c);
@@ -52,5 +56,6 @@ void        ft_putstr(char *s);
 void        render(t_fractal *fractol) ;
 int         events_handler(int keysym,t_fractal *fractol);
 void        mlx_key_gere(t_fractal *fractol);
+void cleanup_and_exit(t_fractal *fractol);
 
 # endif

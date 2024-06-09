@@ -1,6 +1,12 @@
 #include "fractol.h"
 
-
+static void	data_init(t_fractal *fractal)
+{
+    fractal->iterations_defintion = 42;
+	fractal->shift_x = 0.0;
+	fractal->shift_y = 0.0;
+	fractal->zoom = 1.0;
+}
 void mlx_connexion(t_fractal *fractol) 
 {
     fractol->mlx = mlx_init();
@@ -14,6 +20,7 @@ int main(int ac,char **av)
     t_fractal fractol;
     if((ac == 2 && ft_strncmp(av[1],"mandalbrot",10) != 0) || (ac == 4 && ft_strncmp(av[1],"Julia", 5) != 0))
     {
+        data_init(&fractol);
         mlx_connexion(&fractol);
         render(&fractol);
         mlx_key_gere(&fractol);
